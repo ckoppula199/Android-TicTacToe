@@ -35,16 +35,19 @@ public class MainActivity extends AppCompatActivity {
         setImageResource(counter);
 
         counter.animate().translationYBy(1500).rotationBy(360).setDuration(1000);
-        checkForWin();
-        checkForDraw();
+        if (!checkForWin()) {
+            checkForDraw();
+        }
     }
 
-    public void checkForWin() {
+    public boolean checkForWin() {
         for (int[] winningPosition : winningPositions) {
             if (gameState[winningPosition[0]] == gameState[winningPosition[1]] && gameState[winningPosition[1]] == gameState[winningPosition[2]] && gameState[winningPosition[0]] != -1) {
                 gameWon();
+                return true;
             }
         }
+        return false;
     }
 
     public void checkForDraw() {
